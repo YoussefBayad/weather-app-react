@@ -1,14 +1,18 @@
 import React from 'react';
 
 const Filter = ({ query, getQuery }) => {
+  const search = (e) => {
+    if (e.key === 'Enter') {
+      getQuery(e.target.value);
+    }
+  };
   return (
     <div className="search-box">
       <input
         className="search-bar"
         type="text"
         placeholder="Search..."
-        value={query}
-        onSubmit={(e) => getQuery(e.target.value)}
+        onKeyPress={(e) => search(e)}
       />
     </div>
   );

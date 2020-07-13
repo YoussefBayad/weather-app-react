@@ -12,7 +12,7 @@ body {
   background-image: url('./img/cold-bg.jpg');
   background-size: cover;
   background-position: bottom;
-  transition: 0.4 ease;
+  transition: all 1s ease;
   width: 60%;
   margin: auto;
   max-width: 500px;
