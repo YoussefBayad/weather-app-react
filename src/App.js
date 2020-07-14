@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Filter from './components/Filter';
-import Spinner from './Spinner';
+import Spinner from './components/Spinner';
+import Undefained from './components/Undefained';
 
 const App = (api) => {
   const [query, setQuery] = useState('london');
@@ -66,10 +67,9 @@ const App = (api) => {
     >
       <main>
         <Filter query={query} getQuery={(q) => getQuery(q)} />
-
         {isLoading ? (
           <Spinner />
-        ) : (
+        ) : typeof weather.main != 'undefined' ? (
           <div>
             <div className="location-box">
               <div className="location">
@@ -82,6 +82,8 @@ const App = (api) => {
               <div className="weather">{weather.weather[0].main}</div>
             </div>
           </div>
+        ) : (
+          <Undefained />
         )}
       </main>
     </div>
