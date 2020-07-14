@@ -18,7 +18,11 @@ body {
   max-width: 500px;
   border-radius: 1rem;
 }
-
+.spinner {
+  width: 100px;
+  margin: auto;
+  display: block;
+}
 .warm {
   background-image: url('./img/warm-bg.jpg');
 }

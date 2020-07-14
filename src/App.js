@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Filter from './components/Filter';
+import Spinner from './Spinner';
 
 const App = (api) => {
   const [query, setQuery] = useState('london');
   const [weather, setWeather] = useState('');
+  const [isLoading, setIsLoading] = useState('true');
   const getQuery = (q) => {
     setQuery(q);
   };
   useEffect(() => {
-    console.log('use effect runs');
-
+    setIsLoading(true);
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&APPID=4819d5dc107da911cce2d0323fe09c03
       `
@@ -18,7 +19,7 @@ const App = (api) => {
       .then((res) => res.json())
       .then((result) => {
         setWeather(result);
-        console.log(result);
+        setIsLoading(false);
       });
   }, [query]);
   const dateBuilder = (d) => {
@@ -65,7 +66,10 @@ const App = (api) => {
     >
       <main>
         <Filter query={query} getQuery={(q) => getQuery(q)} />
-        {typeof weather.main != 'undefined' ? (
+
+        {isLoading ? (
+          <Spinner />
+        ) : (
           <div>
             <div className="location-box">
               <div className="location">
@@ -78,8 +82,6 @@ const App = (api) => {
               <div className="weather">{weather.weather[0].main}</div>
             </div>
           </div>
-        ) : (
-          ''
         )}
       </main>
     </div>
